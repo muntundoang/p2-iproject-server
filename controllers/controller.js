@@ -55,17 +55,9 @@ class Controller {
                 url: `https://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=${keyMM}&track_id=${track_id}`,
                 method: 'GET'
             })
-            let dataArtist = []
-            getlyric.data.message.body.track_list.forEach((el) => {
-                console.log(el);
-                let obj = {
-                    artist: el.track.artist_name,
-                    trackId: el.track.track_id,
-                    trackName: el.track.track_name
-                }
-                dataArtist.push(obj)
-           });
-            res.status(200).json(dataArtist)
+            let status = getlyric.data.message.header.status_code
+            let lyric = getlyric.data.message.body.lyrics.lyrics_body
+            res.status(status).json(lyric)
         } catch (error) {
             console.error(error)
         }
