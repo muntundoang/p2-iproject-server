@@ -7,19 +7,18 @@ class Controller {
         const {q} = req.query
         try {
             let searchList = await axios({
-                url: `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${q}&key=${keyYT}`,
+                url: `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${q}&key=${keyYT}`,
                 method: 'GET'
             })
             let dataVideo = []
             searchList.data.items.forEach((el) => {
-                console.log(el);
                 let obj = {
                     title: el.snippet.title,
                     thumbnails: el.snippet.thumbnails.high,
                     videoId: el.id.videoId
                 }
                 dataVideo.push(obj)
-           });
+            });
             res.status(200).json(dataVideo)
         } catch (error) {
             console.error(error)
