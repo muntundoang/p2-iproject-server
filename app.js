@@ -15,6 +15,8 @@ app.use(express.urlencoded({extended: false}))
 app.get('/video', Controller.getVideos)
 app.get('/lyric', Controller.getListLyric)
 app.get('/lyric/:track_id', Controller.getLyric)
+app.post('/login', Controller.login)
+app.post('/register', Controller.register)
 
 
 app.listen(port, () => {
